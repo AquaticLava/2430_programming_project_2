@@ -46,7 +46,6 @@ public class Quick {
      * @param a the array to be sorted
      */
     public static void sort(Comparable[] a) {
-        //StdRandom.shuffle(a);//becuse this is bad on mostly sorted arrays, shuffles the array.
         sort(a, 0, a.length - 1);
         assert isSorted(a);
     }
@@ -102,7 +101,6 @@ public class Quick {
         if (k < 0 || k >= a.length) {
             throw new IndexOutOfBoundsException("Selected element out of bounds");
         }
-        //StdRandom.shuffle(a);//TODO
         int lo = 0, hi = a.length - 1;
         while (hi > lo) {
             int i = partition(a, lo, hi);
