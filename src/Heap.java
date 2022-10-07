@@ -28,10 +28,14 @@
  *  For additional documentation, see <a href="http://algs4.cs.princeton.edu/24pq">Section 2.4</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
+ *  Modified by Eric R to count comparisons.
+ *
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
 public class Heap {
+
+    public static int compares = 0;
 
     // This class should not be instantiated.
     private Heap() { }
@@ -40,7 +44,8 @@ public class Heap {
      * Rearranges the array in ascending order, using the natural order.
      * @param pq the array to be sorted
      */
-    public static void sort(Comparable[] pq) {
+    public static int sort(Comparable[] pq) {
+        compares = 0;
         int n = pq.length;
         for (int k = n/2; k >= 1; k--)
             sink(pq, k, n);
@@ -48,6 +53,7 @@ public class Heap {
             exch(pq, 1, n--);
             sink(pq, 1, n);
         }
+        return compares;
     }
 
     /***************************************************************************
@@ -69,6 +75,7 @@ public class Heap {
      * Indices are "off-by-one" to support 1-based indexing.
      ***************************************************************************/
     private static boolean less(Comparable[] pq, int i, int j) {
+        compares++;
         return pq[i-1].compareTo(pq[j-1]) < 0;
     }
 
@@ -81,34 +88,6 @@ public class Heap {
     // is v < w ?
     private static boolean less(Comparable v, Comparable w) {
         return v.compareTo(w) < 0;
-    }
-
-
-    /***************************************************************************
-     *  Check if array is sorted - useful for debugging.
-     ***************************************************************************/
-    private static boolean isSorted(Comparable[] a) {
-        for (int i = 1; i < a.length; i++)
-            if (less(a[i], a[i-1])) return false;
-        return true;
-    }
-
-
-    // print array to standard output
-    private static void show(Comparable[] a) {
-        for (int i = 0; i < a.length; i++) {
-            System.out.println(a[i]);
-        }
-    }
-
-    /**
-     * Reads in a sequence of strings from standard input; heapsorts them;
-     * and prints them to standard output in ascending order.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-
     }
 }
 
