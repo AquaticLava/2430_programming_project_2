@@ -26,6 +26,8 @@
  *
  ******************************************************************************/
 
+import java.util.Arrays;
+
 /**
  *  The {@code Quick} class provides static methods for sorting an
  *  array and selecting the ith smallest element in an array using quicksort.
@@ -37,21 +39,27 @@
  *  @author Kevin Wayne
  */
 public class Quick {
+    public static int compares = 0;
 
     // This class should not be instantiated.
     private Quick() { }
 
     /**
      * Rearranges the array in ascending order, using the natural order.
+     *
      * @param a the array to be sorted
      */
-    public static void sort(Comparable[] a) {
+    public static int sort(Comparable[] a) {
+        compares = 0;
         sort(a, 0, a.length - 1);
         assert isSorted(a);
+
+        return compares;
     }
 
     // quicksort the subarray from a[lo] to a[hi]
     private static void sort(Comparable[] a, int lo, int hi) {
+        compares++;
         if (hi <= lo) return;
         int j = partition(a, lo, hi);
         sort(a, lo, j-1);
@@ -88,30 +96,6 @@ public class Quick {
         return j;
     }
 
-    /**
-     * Rearranges the array so that {@code a[k]} contains the kth smallest key;
-     * {@code a[0]} through {@code a[k-1]} are less than (or equal to) {@code a[k]}; and
-     * {@code a[k+1]} through {@code a[n-1]} are greater than (or equal to) {@code a[k]}.
-     *
-     * @param  a the array
-     * @param  k the rank of the key
-     * @return the key of rank {@code k}
-     */
-    public static Comparable select(Comparable[] a, int k) {
-        if (k < 0 || k >= a.length) {
-            throw new IndexOutOfBoundsException("Selected element out of bounds");
-        }
-        int lo = 0, hi = a.length - 1;
-        while (hi > lo) {
-            int i = partition(a, lo, hi);
-            if      (i > k) hi = i - 1;
-            else if (i < k) lo = i + 1;
-            else return a[i];
-        }
-        return a[lo];
-    }
-
-
 
     /***************************************************************************
      *  Helper sorting functions.
@@ -119,6 +103,7 @@ public class Quick {
 
     // is v < w ?
     private static boolean less(Comparable v, Comparable w) {
+        compares++;
         return v.compareTo(w) < 0;
     }
 
@@ -160,6 +145,13 @@ public class Quick {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
+
+//    	Integer[] test = new Integer[] {9,7,5,6,4,3,2,1,};
+        Integer[] test = new Integer[]{2, 1};
+        System.out.println(Arrays.toString(test));
+        int compares = Quick.sort(test);
+        System.out.println(Arrays.toString(test));
+        System.out.println("compares: " + compares);
 
     }
 
