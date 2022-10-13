@@ -25,7 +25,8 @@ public class TestClass {
         for (int i = 0; i < 3; i++) {
             System.out.println("Sorting algorithm Heap, Array of length " + (4+(i*2)) + "\n");
             ResultTracker tracker = new ResultTracker();
-            for (Integer[] array : new IterableArrayGenerator(4+(i*2))) {
+            List<Integer[]> ints = ArrayGenerator.generatePermutation(4+(i*2));
+            for (Integer[] array : ints) {
                 Result currentResult = new Result(Arrays.copyOf(array,array.length),Heap.sort(array));
                 //System.out.print(currentResult);
                 tracker.checkBestOrWorst(currentResult);
@@ -48,8 +49,8 @@ public class TestClass {
         for (int i = 0; i < 3; i++) {
             System.out.println("Sorting algorithm Quick, Array of length " + (4+(i*2)) + "\n");
             ResultTracker tracker = new ResultTracker();
-            IterableArrayGenerator permutations = new IterableArrayGenerator(4+(i*2));
-            for (Integer[] array : permutations) {
+            List<Integer[]> ints = ArrayGenerator.generatePermutation(4+(i*2));
+            for (Integer[] array : ints) {
                 Result currentResult = new Result(Arrays.copyOf(array,array.length),Quick.sort(array));
                 //System.out.print(currentResult);
                 tracker.checkBestOrWorst(currentResult);
