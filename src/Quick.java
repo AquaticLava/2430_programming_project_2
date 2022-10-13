@@ -59,7 +59,6 @@ public class Quick {
 
     // quicksort the subarray from a[lo] to a[hi]
     private static void sort(Comparable[] a, int lo, int hi) {
-        compares++;
         if (hi <= lo) return;
         int j = partition(a, lo, hi);
         sort(a, lo, j-1);
