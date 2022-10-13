@@ -116,5 +116,6 @@ public class ResultTracker {
 
         System.out.println("Average result: ");
         System.out.println(getAverage());
+        System.out.println();
     }
 }
