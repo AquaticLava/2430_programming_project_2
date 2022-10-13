@@ -15,12 +15,23 @@ public class TestClass {
         ArrayList<Integer[]> ints = ArrayGenerator.generatePermutation(3);
         ResultTracker tracker = new ResultTracker();
         for (Integer[] i : ints) {
-            Result currentResult = new Result(Arrays.copyOf(i,i.length),Heap.sort(i));
+            Result currentResult = new Result(Arrays.copyOf(i, i.length), Heap.sort(i));
             System.out.print(currentResult);
 
             tracker.checkBestOrWorst(currentResult);
             tracker.addToAverage(currentResult.getCompares());
         }
         tracker.print();
+
+        // added Results for QuickSort
+        ints = ArrayGenerator.generatePermutation(3);
+        ResultTracker quickTracker = new ResultTracker();
+        for (Integer[] i : ints) {
+            Result currentResult = new Result(Arrays.copyOf(i, i.length), Quick.sort(i));
+            System.out.print(currentResult);
+            quickTracker.checkBestOrWorst(currentResult);
+            quickTracker.addToAverage(currentResult.getCompares());
+        }
+        quickTracker.print();
     }
 }
