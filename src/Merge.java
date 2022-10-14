@@ -32,8 +32,10 @@
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public class Merge {
 
+
+public class Merge {
+    public static int compares = 0;
     // This class should not be instantiated.
     private Merge() { }
 
@@ -74,10 +76,13 @@ public class Merge {
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
-    public static void sort(Comparable[] a) {
+    public static int sort(Comparable[] a) {
+        compares = 0;
         Comparable[] aux = new Comparable[a.length];
         sort(a, aux, 0, a.length-1);
         assert isSorted(a);
+        return compares;
+
     }
 
 
@@ -87,6 +92,7 @@ public class Merge {
 
     // is v < w ?
     private static boolean less(Comparable v, Comparable w) {
+        compares++;
         return v.compareTo(w) < 0;
     }
 
@@ -167,6 +173,8 @@ public class Merge {
     public static void main(String[] args) {
     }
 }
+
+
 
 /******************************************************************************
  *  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
