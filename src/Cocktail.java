@@ -2,6 +2,7 @@
 //source: https://www.geeksforgeeks.org/cocktail-sort/
 public class Cocktail
 {
+    //TODO use a Integer array!
     void sort(int a[])
     {
         boolean swapped = true;
