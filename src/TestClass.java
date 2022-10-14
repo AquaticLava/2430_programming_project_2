@@ -5,70 +5,46 @@ import java.util.*;
  * @author Eric R
  */
 public class TestClass {
+    private static int getMethodUsingInt(int i, Integer[] array){
+        switch(i){
+            case 0 -> {return Heap.sort(array);}
+            case 1 -> {return Quick.sort(array);}
+            //case 2 -> {return Merge.sort(array);}
+            //case 3 -> {return new Cocktail().sort(array);}
+            default -> {return -1;}
+        }
+
+    }
     /**
      * Uses ArrayGenerator to generate data to sort.
      * Calls each sort method to sort the generated data then
      * uses ResultTracker to keep track of profiling data.
      */
     public static void main(String[] args) {
-        //TODO add other algorithms and array sizes.
-//        ResultTracker tracker = new ResultTracker();
-//        IterableArrayGenerator permutations = new IterableArrayGenerator(8);
-//        for (Integer[] i : permutations) {
-//            Result currentResult = new Result(Arrays.copyOf(i,i.length),Heap.sort(i));
-//            //System.out.print(currentResult);
-//
-//            tracker.checkBestOrWorst(currentResult);
-//            tracker.addToAverage(currentResult.getCompares());
-//        }
-//        tracker.print();
-        for (int i = 0; i < 3; i++) {
-            System.out.println("Sorting algorithm Heap, Array of length " + (4+(i*2)) + "\n");
-            ResultTracker tracker = new ResultTracker();
-            List<Integer[]> ints = ArrayGenerator.generatePermutation(4+(i*2));
-            for (Integer[] array : ints) {
-                Result currentResult = new Result(Arrays.copyOf(array,array.length),Heap.sort(array));
-                //System.out.print(currentResult);
-                tracker.checkBestOrWorst(currentResult);
-                tracker.addToAverage(currentResult.getCompares());
+        String[] algorithmNames = {
+                "Heap Sort",
+                "Quick Sort",
+                "Merge Sort",
+                "Cocktail Sort"
+        };
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                ResultTracker tracker = new ResultTracker();
+                List<Integer[]> ints = ArrayGenerator.generatePermutation(4+(j*2));
+
+                System.out.println("Sorting algorithm " + algorithmNames[i] + ", Array of length " + (4+(j*2)) + "\n");
+
+                for (Integer[] array : ints) {
+                    Result currentResult = new Result(
+                            Arrays.copyOf(array,array.length),
+                            getMethodUsingInt(i,array));
+
+                    tracker.checkBestOrWorst(currentResult);
+                    tracker.addToAverage(currentResult.getCompares());
+                }
+                tracker.print();
             }
-            tracker.print();
         }
-//        for (int i = 0; i < 3; i++) {
-//            System.out.println("Sorting algorithm Merge, Array of length " + (4+(i*2)) + "\n");
-//            ResultTracker tracker = new ResultTracker();
-//            IterableArrayGenerator permutations = new IterableArrayGenerator(4+(i*2));
-//            for (Integer[] array : permutations) {
-//                Result currentResult = new Result(Arrays.copyOf(array,array.length),Merge.sort(array));
-//                //System.out.print(currentResult);
-//                tracker.checkBestOrWorst(currentResult);
-//                tracker.addToAverage(currentResult.getCompares());
-//            }
-//            tracker.print();
-//        }
-        for (int i = 0; i < 3; i++) {
-            System.out.println("Sorting algorithm Quick, Array of length " + (4+(i*2)) + "\n");
-            ResultTracker tracker = new ResultTracker();
-            List<Integer[]> ints = ArrayGenerator.generatePermutation(4+(i*2));
-            for (Integer[] array : ints) {
-                Result currentResult = new Result(Arrays.copyOf(array,array.length),Quick.sort(array));
-                //System.out.print(currentResult);
-                tracker.checkBestOrWorst(currentResult);
-                tracker.addToAverage(currentResult.getCompares());
-            }
-            tracker.print();
-        }
-//        for (int i = 0; i < 3; i++) {
-//            System.out.println("Sorting algorithm Cocktail, Array of length " + (4+(i*2)) + "\n");
-//            ResultTracker tracker = new ResultTracker();
-//            IterableArrayGenerator permutations = new IterableArrayGenerator(4+(i*2));
-//            for (Integer[] array : permutations) {
-//                Result currentResult = new Result(Arrays.copyOf(array,array.length),Cocktail.sort(array));
-//                //System.out.print(currentResult);
-//                tracker.checkBestOrWorst(currentResult);
-//                tracker.addToAverage(currentResult.getCompares());
-//            }
-//            tracker.print();
-//        }
     }
 }
