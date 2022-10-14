@@ -10,7 +10,7 @@ public class TestClass {
             case 0 -> {return Heap.sort(array);}
             case 1 -> {return Quick.sort(array);}
             case 2 -> {return Merge.sort(array);}
-            //case 3 -> {return new Cocktail().sort(array);}
+            case 3 -> {return new Cocktail().sort(array);}
             default -> {return -1;}
         }
 
@@ -28,7 +28,7 @@ public class TestClass {
                 "Cocktail Sort"
         };
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 3; j++) {
                 ResultTracker tracker = new ResultTracker();
                 List<Integer[]> ints = ArrayGenerator.generatePermutation(4+(j*2));
